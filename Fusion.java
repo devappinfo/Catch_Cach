@@ -1,4 +1,4 @@
-package com.example.to.myapplication;
+package com.example.tom_j.objets_geocaching;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

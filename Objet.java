@@ -1,4 +1,4 @@
-package com.example.to.myapplication;
+package com.example.tom_j.objets_geocaching;
 
 import android.widget.ImageView;
 
@@ -233,4 +233,3 @@ public class Objet {
         this.imageView = imageView;
     }
 }
-
