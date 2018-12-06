@@ -20,9 +20,10 @@ public class Cache {
 
     private String nom;
     private String qRCode;
+    private List<Joueurs> listJoueurs;
     private LatLng coordonnees;
     public MainActivity context;
-    private boolean me;
+    private boolean me; 
 
     public String getDescription() {
         return description;
