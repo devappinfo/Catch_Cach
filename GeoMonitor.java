@@ -29,6 +29,27 @@ public class GeoMonitor {
                     @Override
                     public void onConnected(Bundle bundle) {
                         Log.d("", "Connected to GoogleApiClient");
+                        try {
+                            LocationRequest locationRequest = LocationRequest.create()
+                                    .setInterval(1000)
+                                    .setFastestInterval(500)
+                                    //.setNumUpdates(5)
+                                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+                            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
+                                    locationRequest, new LocationListener() {
+                                        @Override
+                                        public void onLocationChanged(Location location) {
+                                            Log.d("", "Location update lat/long " + location.getLatitude() + " " + location.getLongitude());
+                                            if (location.getLatitude() != 0 && location.getLongitude() != 0){
+                                                latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                            }
+                                        }
+                                    });
+
+                        } catch (SecurityException e){
+                            Log.d("", "SecurityException - " + e.getMessage());
+                        }
                     }
 
                     @Override
@@ -47,29 +68,6 @@ public class GeoMonitor {
 
     private LatLng getLocation() {
         Log.d("", "Enter location getter");
-
-        try {
-            LocationRequest locationRequest = LocationRequest.create()
-                    .setInterval(1000)
-                    .setFastestInterval(500)
-                    //.setNumUpdates(5)
-                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,
-                    locationRequest, new LocationListener() {
-                        @Override
-                        public void onLocationChanged(Location location) {
-                            Log.d("", "Location update lat/long " + location.getLatitude() + " " + location.getLongitude());
-                            if (location.getLatitude() != 0 && location.getLongitude() != 0){
-                                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            }
-                        }
-                    });
-
-            return latLng;
-        } catch (SecurityException e){
-            Log.d("", "SecurityException - " + e.getMessage());
-        }
-        return null;
+        return latLng;
     }
 }
